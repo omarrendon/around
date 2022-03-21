@@ -1,26 +1,26 @@
+import { useState } from 'react';
 import { Button } from '@mui/material'
 import { useStyles } from './styles';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { useState } from 'react';
 
 export const OrderButton = ({ setOrder }) => {
-  const classes =  useStyles();
-  const [valueButton, setValueButton] = useState('Descendentemente');
-
+  const classes = useStyles();
+  const [valueButton, setValueButton] = useState(false);
+  const statusValue = !valueButton ? 'Descendentemente' : 'Ascendentemente';
+  
   const handleOrderRates = () => {
-    const value = valueButton === 'Descendentemente' ? 'Ascendentemente': 'Descendentemente';
-    setValueButton(value);
-    setOrder(value);
+    setValueButton(!valueButton);
+    setOrder(statusValue);
   };
 
   return (
-      <Button
-        startIcon={valueButton === 'Descendentemente' ? <ArrowDownwardIcon /> : <ArrowUpwardIcon /> }
-        variant='contained'
-        onClick={handleOrderRates}
-      >
-        {valueButton}
-      </Button>
+    <Button
+      startIcon={!valueButton ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
+      variant='contained'
+      onClick={handleOrderRates}
+    >
+      {statusValue }
+    </Button>
   )
 }

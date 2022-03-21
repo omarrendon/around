@@ -10,15 +10,14 @@ export const ResultCards = ({ order }) => {
   const [rates, setRates] = useState([]);
 
   useEffect(() => {
-    if(order) {
-      console.log('order 11', order);
-      console.log('rates', rates);
-      rates.value?.sort(function (a, b) {return  a - b;});
-      console.log('orderValues', rates);
-
+    if (order) {
+      let sortRates = order === 'Descendentemente'
+        ? rates.slice(0).sort((a, b) => b.value - a.value)
+        : rates.slice(0).sort((a, b) => a.value - b.value);
+      setRates(sortRates);
     }
   }, [order])
-  
+
 
   useEffect(() => {
     const objectRates = currencies?.rates;
@@ -35,9 +34,9 @@ export const ResultCards = ({ order }) => {
   }, [currencies?.rates, findCurrency]);
 
   useEffect(() => {
-    if(findCurrency) {
+    if (findCurrency) {
       const filterValues = rates.filter((rate) => {
-        return (rate.key.indexOf(findCurrency) !== -1 );
+        return (rate.key.indexOf(findCurrency) !== -1);
       });
       setRates(filterValues);
     }

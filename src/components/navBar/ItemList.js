@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDataFromAPI } from '../../redux/actions/fetchDataActions';
+import { fetchDataFromAPI, findCurrency } from '../../redux/actions/fetchDataActions';
 import { PriceCard } from '../priceCard/PriceCard';
 import { useStyles } from './styles';
 
@@ -13,6 +13,7 @@ export const ItemList = ({ setIsOpenMenu, isOpenMenu }) => {
     const { key } = favorite?.rate;
     setIsOpenMenu(!isOpenMenu);
     dispatch(fetchDataFromAPI(key));
+    dispatch(findCurrency(''));
   };
 
   return (
